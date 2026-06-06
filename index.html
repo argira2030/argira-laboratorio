@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>ARGIRA – Museo Sonoro · Accesible</title>
+<meta name="description" content="Argira es un museo sonoro que convierte pinturas en sonido mediante matemáticas emergentes. Correlación r=0.8869 entre estructura cromática y complejidad sonora (Argira v3.5, N=45). ICAD 2026 · Jose Ranero García.">
+<link rel="canonical" href="https://argira.eus/argira-sonification/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://argira.eus/argira-sonification/">
+<meta property="og:title" content="ARGIRA – Museo Sonoro · Accesible">
+<meta property="og:description" content="Convierte pinturas en sonido mediante matemáticas emergentes. Correlación r=0.8869 entre variabilidad cromática y complejidad sonora (Argira v3.5, N=45, ICAD 2026).">
+<meta property="og:image" content="https://argira.eus/argira-sonification/3840px-Kandinsky_-_Jaune_Rouge_Bleu.jpg">
+<meta property="og:image:alt" content="Amarillo Rojo Azul, Wassily Kandinsky, 1925, obra con mayor variabilidad cromática de la galería">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ARGIRA – Museo Sonoro · Accesible">
+<meta name="twitter:description" content="Convierte pinturas en sonido mediante matemáticas. r=0.8869 entre color y complejidad sonora (Argira v3.5, N=45). ICAD 2026 · Jose Ranero García.">
+<meta name="twitter:image" content="https://argira.eus/argira-sonification/3840px-Kandinsky_-_Jaune_Rouge_Bleu.jpg">
+<meta name="twitter:image:alt" content="Amarillo Rojo Azul, Wassily Kandinsky, 1925">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎧</text></svg>">
+</head>
+<body>
+<a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+<div aria-live="polite" aria-atomic="true" class="sr-only" id="live-region"></div>
+
+<nav class="site-nav" aria-label="Navegación principal">
+  <div class="site-nav-inner">
+    <a href="#hero" class="nav-link">Argira</a>
+    <a href="#galeria" class="nav-link">Galería</a>
+    <a href="#analiza-tu-imagen" class="nav-link">Sube tu obra</a>
+    <a href="#lupa-temporal" class="nav-link">Lupa</a>
+    <a href="#test-auditivo" class="nav-link">Test Auditivo</a>
+
+    <a href="https://argira.eus/argira-encuesta/" class="nav-link nav-link-highlight">Encuesta</a>
+    <a href="https://argira.eus/argira-investiga/" class="nav-link" target="_blank" rel="noopener noreferrer">Investiga</a>
+    <a href="https://zenodo.org/records/18865019" class="nav-link" target="_blank" rel="noopener noreferrer">Dataset</a>
+
+  </div>
+</nav>
+
+<div class="access-guide" role="region" aria-label="Guía de accesibilidad">
+  <p class="access-guide-summary"><strong>ARGIRA</strong> es un proyecto de investigación científica sobre <strong>sonificación</strong> — convertir pinturas en sonido.</p>
+  <p class="access-guide-summary">
+    🎧 <strong>Argira es accesible con VoiceOver y TalkBack.</strong>
+    Navega con <kbd>Tab</kbd> · <kbd>Espacio</kbd> para reproducir ·
+    <kbd>⏹ Detener todo</kbd> siempre disponible.
+  </p>
+  <details>
+    <summary>Cómo explorar las obras con el tacto y la voz</summary>
+    <ul>
+      <li><strong>👆 Tocar</strong> — Toca cualquier zona de la imagen. La voz dice la posición, el nombre del color, su frecuencia en Hz y qué objeto hay en ese punto. Simultáneamente suena un tono.</li>
+      <li><strong>🖐 Barrido</strong> — Desliza el dedo por la imagen para explorarla de corrido. El sonido cambia en tiempo real.</li>
+      <li><strong>🦯 Braille</strong> <em>(en desarrollo)</em> — Como Barrido, pero la voz termina de describir cada zona antes de avanzar. Diseñado para no perderse ningún detalle. Mejoras en curso.</li>
+      <li><strong>🖼️ Tour espacial</strong> — Pulsa el botón y la obra se describe sola, zona a zona, siguiendo las horas del reloj (12h → 1h → … → centro).</li>
+      <li><strong>🔊 Leer descripción</strong> — Lee en voz alta la descripción completa de cada cuadro.</li>
+      <li><strong>🐢 Lupa temporal</strong> — Ralentiza el audio hasta 0.5× para percibir la textura cromática con más detalle.</li>
+      <li><strong>📳 Vibración</strong> — En Android, cada toque vibra de forma diferente según la complejidad de color de la obra. En iOS, la vibración háptica no está disponible actualmente, pero los modos Tocar y Barrido funcionan con audio completo.</li>
+    </ul>
+  </details>
+  <p class="access-guide-feedback">No podemos probar Argira con todos los lectores de pantalla. Si algo no funciona como esperas — un botón que no se anuncia, un audio que no responde — puedes contárnoslo en la <a href="https://argira.eus/argira-encuesta/">encuesta</a>. Cada aviso ayuda a mejorar.</p>
+</div>
+
+<header class="hero" id="hero">
+  <p class="hero-eyebrow">Argira Station &nbsp;|&nbsp; ICAD 2026 &nbsp;|&nbsp; Jose Ranero García &nbsp;|&nbsp; Investigación aceptada</p>
+  <h1 class="hero-title">ARGIRA</h1>
+  <p class="hero-sub">Museo Sonoro · Sonificación de Pinturas</p>
+  <p class="bridge-phrase" role="note">🎧 La alta correlación estadística (r=0.89) sugiere que una persona invidente podría, en principio, distinguir estilos pictóricos por el sonido.</p>
+  <div class="stats-grid">
+    <div class="stat"><span class="stat-value">16</span><span class="stat-label">Obras en esta demo</span></div>
+    <div class="stat"><span class="stat-value">45</span><span class="stat-label">Obras en Dataset completo</span></div>
+  </div>
+
+  <p class="hero-desc">Cada pintura tiene una <strong>estructura cromática única</strong>.<br>La regla de conversión es fija, pero la textura sonora que emerge no está diseñada.<br><br>Las obras están ordenadas de <strong>menor a mayor variabilidad de color</strong>.<br>Escucha el gradiente: del silencio al caos.</p>
+  <div class="scale-bar">
+    <div class="scale-bar-track"></div>
+    <div class="scale-bar-labels"><span>Blanco/Negro · Silencio</span><span>Color máximo · Complejidad</span></div>
+  </div>
+</header>
+
+<main id="contenido-principal">
+  <div class="access-intro">
+    <div class="access-box">
+      <span class="access-eyebrow">Accesibilidad · Arte · Sonido</span>
+      <h2 class="access-title">Imagina que no puedes ver.<br>¿Cómo escucharías un cuadro?</h2>
+      <p class="access-body">Argira convierte pinturas en sonido respetando su estructura real. Un cuadro lleno de color suena complejo y agudo. Uno oscuro y tranquilo suena grave y simple. No es una audioguía que describe lo que ves, <strong>es la estructura de la pintura traducida a sonido</strong>, con una correlación matemática de r=0.8869.</p>
+      <ul class="access-uses">
+        <li><strong>👁️ Museos accesibles</strong> — El sonido se genera mediante una regla matemática fija, pero la complejidad acústica que emerge no está programada: es una consecuencia física de la interacción armónica. No es una traducción simbólica del tipo "azul = agudo", sino una transformación estructural que preserva la variabilidad cromática.</li>
+        <li><strong>🎨 Arte para todos</strong> — Un niño, un adulto sin formación artística, alguien que no habla el idioma, todos podrían sentir la estructura de un cuadro con los oídos.</li>
+        <li><strong>🔢 No es arbitrario</strong> — La regla de conversión es fija (hue → frecuencia), pero la textura sonora que emerge no está diseñada: surge de la física de los armónicos. La misma pintura siempre produce el mismo perfil acústico.</li>
+        <li><strong>🌍 Extensible a otras imágenes</strong> — Validado sobre 45 obras (dataset validado por pares, Zenodo v10). Extensible a otras imágenes, pero pendiente de verificación específica.</li>
+      </ul>
+      <div class="access-faq">
+        <span class="access-faq-title">Preguntas frecuentes</span>
+        <details class="faq-item"><summary class="faq-q">¿Esto ya existe?</summary><p class="faq-a">Sí, hay sistemas de sonificación. Pero Argira nació aplicando la correlación de Pearson (1895) y la regresión lineal para medir la relación entre variabilidad de tono y complejidad sonora. Al analizar 45 obras (dataset validado por pares, Zenodo v10), la correlación r&nbsp;=&nbsp;0.8869 emergió de los datos.</p></details>
+        <details class="faq-item"><summary class="faq-q">¿Para qué sirve realmente?</summary><p class="faq-a">Para que una persona invidente pueda distinguir un Monet de un Rothko solo por el sonido.</p></details>
+        <details class="faq-item"><summary class="faq-q">¿Cómo funciona?</summary><p class="faq-a">El sonido se genera mediante una regla matemática fija, pero la complejidad acústica que emerge no está programada: es una consecuencia física de la interacción armónica. No es una traducción simbólica del tipo "azul = agudo", sino una transformación estructural que preserva la variabilidad cromática.</p></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== GALERÍA (16 obras completas) ========== -->
+  <section aria-labelledby="galeria-titulo" id="galeria">
+    <div class="section-header">
+      <span class="section-label">Escala de variabilidad cromática</span>
+      <h2 class="section-title" id="galeria-titulo">Las 16 obras, de menor a mayor cromatismo</h2>
+    </div>
+    <div class="gallery" role="list">
+      <!-- Aquí van las 16 tarjetas. Como son muchas, pondré una por una con los datos que ya tenías. -->
+      <!-- #1 Malevich -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#1 / 16</span><span class="chroma-level" style="background:#222;color:#999;">MÍNIMO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 4% — Mínimo"><div class="chroma-bar" aria-hidden="true" style="width:4%;background:#3a3a3a;"></div></div>
+        <img class="card-image" src="White_on_White_(Malevich,_1918).png" alt="Blanco sobre Blanco, Kazimir Malevich, 1918" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Kazimir Malevich</h3>
+          <p class="card-work">Blanco sobre Blanco (1918)</p>
+          <p class="card-desc">El silencio absoluto del color. Cuadrado blanco sobre fondo blanco, variabilidad cromática casi nula. Punto de partida de la escala.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Frecuencia dominante: grave, casi inaudible. Textura: tono puro sin armónicos. Dimensión fractal mínima, el sonido más cercano al silencio que genera estructura.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls aria-label="Sonificación de Blanco sobre Blanco, Kazimir Malevich"><source src="White_on_White_(Malevich,_1918).wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">⬜ Monocromático extremo</span><span class="tag" aria-hidden="true">🔇 Silencio sonoro</span><span class="tag" aria-hidden="true">∞ Abstracción pura</span></div>
+          <button type="button" class="speak-btn" data-text="Blanco sobre Blanco, Kazimir Malevich, 1918. Lienzo completamente blanco con un cuadrado blanco girado levemente, apenas distinguible del fondo. Abstracción suprematista en su máxima reducción: ausencia casi total de color y contraste.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #2 Malevich - Cuadrado Negro -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#2 / 16</span><span class="chroma-level" style="background:#1a1a1a;color:#777;">MUY BAJO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 9% — Muy bajo"><div class="chroma-bar" aria-hidden="true" style="width:9%;background:#2a2a2a;"></div></div>
+        <img class="card-image" src="Kazimir_Malevich,_1915,_Black_Suprematic_Square,_oil_on_linen_canvas,_79.5_x_79.5_cm,_Tretyakov_Gallery,_Moscow.jpg" alt="Cuadrado Negro, Kazimir Malevich, 1915" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Kazimir Malevich</h3>
+          <p class="card-work">Cuadrado Negro (1915)</p>
+          <p class="card-desc">El contraste máximo con los mínimos colores posibles. Negro absoluto frente a blanco absoluto. Dos tonos, cero matices, la dualidad más elemental.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Dos frecuencias: una grave (negro) y una alta (blanco). Sin modulación entre ellas. El contraste extremo genera una tensión tonal estática, como una nota pedal y su armónico fundamental.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls aria-label="Sonificación de Cuadrado Negro, Kazimir Malevich"><source src="Kazimir_Malevich,_1915,_Black_Suprematic_Square,_oil_on_linen_canvas,_79.5_x_79.5_cm,_Tretyakov_Gallery,_Moscow.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">⬛ Binarismo extremo</span><span class="tag" aria-hidden="true">🔲 Sin matices</span><span class="tag" aria-hidden="true">💎 Geometría suprematista</span></div>
+          <button type="button" class="speak-btn" data-text="Cuadrado Negro, Kazimir Malevich, 1915. Un cuadrado negro perfecto centrado sobre un fondo blanco. La obra suprematista más icónica: máximo contraste binario, pero solo dos colores: negro y blanco. Ninguna variación de tono o matiz.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #3 Goya -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#3 / 16</span><span class="chroma-level" style="background:#1e1410;color:#888;">MUY BAJO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 14% — Muy bajo"><div class="chroma-bar" aria-hidden="true" style="width:14%;background:linear-gradient(to right,#2a1a0a,#4a2a10);"></div></div>
+        <img class="card-image" src="goya-saturno.jpg" alt="Saturno devorando a su hijo, Francisco de Goya, 1819-1823" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Francisco de Goya</h3>
+          <p class="card-work">Saturno devorando a su hijo (c. 1819–1823)</p>
+          <p class="card-desc">La oscuridad más densa de las Pinturas Negras. Negros, marrones y un fugaz destello de carne. Variabilidad cromática mínima pero brutal en su impacto.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Graves dominantes con una presencia perturbadora. El único acento cálido (la carne) emerge como una disonancia breve sobre un zumbido continuo oscuro.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls aria-label="Sonificación de Saturno devorando a su hijo, Francisco de Goya"><source src="goya-saturno.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🖤 Pinturas Negras</span><span class="tag" aria-hidden="true">💀 Horror contenido</span><span class="tag" aria-hidden="true">🎵 Graves perturbadores</span></div>
+          <button type="button" class="speak-btn" data-text="Saturno devorando a su hijo, Francisco de Goya, circa 1819 a 1823. Figura colosal de Saturno sosteniendo y mordiendo un cuerpo humano. Paleta dramáticamente oscura dominada por negros, ocres turbios y marrones terrosos. Obra de las Pinturas Negras, máxima expresión del horror con mínimos colores.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #4 Rembrandt -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#4 / 16</span><span class="chroma-level" style="background:#3d2b0a;color:#c9a84c;">BAJO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 22% — Bajo"><div class="chroma-bar" aria-hidden="true" style="width:22%;background:linear-gradient(to right,#3d2b0a,#6b4a18);"></div></div>
+        <img class="card-image" src="500px-Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.jpg" alt="Autorretrato, Rembrandt van Rijn, 1659" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Rembrandt van Rijn</h3>
+          <p class="card-work">Autorretrato (1659)</p>
+          <p class="card-desc">Chiaroscuro puro: ocres y marrones en sombra profunda. Mínima variabilidad de tono, máxima profundidad psicológica.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Frecuencia baja-media, cálida. Armónicos escasos pero presentes. La estructura cromática mínima produce un sonido denso y contenido, como un acorde sostenido en la oscuridad.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls aria-label="Sonificación de Autorretrato, Rembrandt van Rijn"><source src="500px-Rembrandt_van_Rijn_-_Self-Portrait_-_Google_Art_Project.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🕯️ Chiaroscuro</span><span class="tag" aria-hidden="true">🎵 Sonido simple</span><span class="tag" aria-hidden="true">🏺 Calma intensa</span></div>
+          <button type="button" class="speak-btn" data-text="Autorretrato, Rembrandt van Rijn, 1659. El artista mira de frente con expresión serena y resignada. Iluminación lateral que emerge de la oscuridad. Paleta dominada por ocres cálidos, marrones oscuros y negros profundos. Técnica chiaroscuro en su máxima expresión barroca.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #5 Hopper -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#5 / 16</span><span class="chroma-level" style="background:#4a3010;color:#d4a050;">BAJO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 28% — Bajo"><div class="chroma-bar" aria-hidden="true" style="width:28%;background:linear-gradient(to right,#4a3010,#c08030);"></div></div>
+        <img class="card-image" src="EdwardHopperMorningSun1952.jpg" alt="Morning Sun, Edward Hopper, 1952" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Edward Hopper</h3>
+          <p class="card-work">Morning Sun (1952)</p>
+          <p class="card-desc">Luz solar contenida sobre blancos y ocres. El silencio americano de Hopper tiene una paleta discreta pero más cálida que el Barroco.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Tonos medios con una calidez lenta. La luz uniforme produce frecuencias estables con suave variación, como una nota larga que se calienta gradualmente al amanecer.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls aria-label="Sonificación de Morning Sun, Edward Hopper"><source src="EdwardHopperMorningSun1952.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">☀️ Luz matutina</span><span class="tag" aria-hidden="true">🏠 Soledad urbana</span><span class="tag" aria-hidden="true">🎵 Calidez contenida</span></div>
+          <button type="button" class="speak-btn" data-text="Morning Sun, Edward Hopper, 1952. Mujer sentada en la cama mirando por una ventana hacia el sol de la mañana. Luz naranja y ocre inunda la habitación desde la izquierda. Paleta cálida y contenida: blancos amarillos, naranjas suaves, sombras beige. Silencio y soledad del realismo americano.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #6 Vermeer -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#6 / 16</span><span class="chroma-level" style="background:#3a2a08;color:#d4b040;">BAJO-MEDIO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 34% — Bajo-medio"><div class="chroma-bar" aria-hidden="true" style="width:34%;background:linear-gradient(to right,#5a3a10,#c09020);"></div></div>
+        <img class="card-image" src="Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.png" alt="La Lechera, Johannes Vermeer, 1657-1658" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Johannes Vermeer</h3>
+          <p class="card-work">La Lechera (c. 1657–58)</p>
+          <p class="card-desc">Azul y amarillo en equilibrio holandés. Más variedad que el Barroco oscuro, pero contenida en la intimidad doméstica.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Dos frecuencias dominantes (azul y amarillo) en diálogo sereno. La textura es más rica que Rembrandt pero sigue siendo íntima, como dos instrumentos en conversación tranquila.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls aria-label="Sonificación de La Lechera, Johannes Vermeer"><source src="Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">💛 Amarillo y azul</span><span class="tag" aria-hidden="true">🏡 Intimidad doméstica</span><span class="tag" aria-hidden="true">🎵 Dos voces</span></div>
+          <button type="button" class="speak-btn" data-text="La Lechera, Johannes Vermeer, circa 1657 a 1658. Mujer de pie en una habitación iluminada lateralmente vierte leche de un jarro. Viste delantal azul y blusa amarilla. La paleta es íntima y luminosa: azules, amarillos y blancos cuidadosamente equilibrados sobre fondo neutro.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #7 Dalí -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#7 / 16</span><span class="chroma-level" style="background:#4a2d0a;color:#e8a030;">BAJO-MEDIO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 38% — Bajo-medio"><div class="chroma-bar" aria-hidden="true" style="width:38%;background:linear-gradient(to right,#6b3a10,#c9841c);"></div></div>
+        <img class="card-image" src="Dalí,_Perfil_del_tiempo,_Vroclavo,_7.jpeg" alt="Perfil del Tiempo, Salvador Dalí, 1977" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Salvador Dalí</h3>
+          <p class="card-work">Perfil del Tiempo – Vroclavo (1977)</p>
+          <p class="card-desc">Ocres dorados y sombras frías. La paleta surreal de Dalí contiene más variedad que el Barroco pero sigue siendo contenida.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Textura media con ligeras disonancias. El contraste entre tonos cálidos y fríos genera fluctuaciones de frecuencia, como el tiempo que se derrite.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="Dalí,_Perfil_del_tiempo,_Vroclavo,_7.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🕐 Tiempo suspendido</span><span class="tag" aria-hidden="true">🌡️ Contraste térmico</span><span class="tag" aria-hidden="true">🎭 Surrealismo</span></div>
+          <button type="button" class="speak-btn" data-text="Perfil del Tiempo, Salvador Dalí, 1977. Relojes blandos derritiéndose sobre superficies de un paisaje desértico costero. Paleta de ocres dorados, azules de cielo y sombras frías. Contraste entre calidez terrosa y frialdad del mar surrealista.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #8 Cézanne -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#8 / 16</span><span class="chroma-level" style="background:#2a3a10;color:#90c040;">MEDIO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 46% — Medio"><div class="chroma-bar" aria-hidden="true" style="width:46%;background:linear-gradient(to right,#305010,#80b030);"></div></div>
+        <img class="card-image" src="Paul_Cézanne_-_Montagne_Saint-victoire_-_Google_Art_Project.jpg" alt="Mont Sainte-Victoire, Paul Cézanne, 1902-1904" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Paul Cézanne</h3>
+          <p class="card-work">Mont Sainte-Victoire (c. 1902–04)</p>
+          <p class="card-desc">Verdes, azules y ocres estructurales. La geometría cézanniana distribuye el color de forma analítica.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Espectro de frecuencias medias con modulación geométrica. Las pinceladas aisladas de color se traducen en pulsos discretos.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="Paul_Cézanne_-_Montagne_Saint-victoire_-_Google_Art_Project.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">⛰️ Geometría provenzal</span><span class="tag" aria-hidden="true">🎨 Postimpresionismo</span><span class="tag" aria-hidden="true">🎵 Espectro medio</span></div>
+          <button type="button" class="speak-btn" data-text="Mont Sainte-Victoire, Paul Cézanne, circa 1902 a 1904. Paisaje provenzal con la montaña al fondo. Pinceladas geométricas de verdes, azules, ocres y tierras construyen el espacio de manera analítica. Paleta de naturaleza moderada con diversidad de tonos medios.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #9 Monet - Acantilados -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#9 / 16</span><span class="chroma-level" style="background:#1a3a1a;color:#5ab85a;">MEDIO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 55% — Medio"><div class="chroma-bar" aria-hidden="true" style="width:55%;background:linear-gradient(to right,#1a5a1a,#4ab04a);"></div></div>
+        <img class="card-image" src="Claude_Monet_-_Cliff_Walk_at_Pourville_-_Google_Art_Project.jpg" alt="Paseo por los acantilados de Pourville, Claude Monet, 1882" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Claude Monet</h3>
+          <p class="card-work">Paseo por los acantilados de Pourville (1882)</p>
+          <p class="card-desc">Verdes, azules y blancos en vibración impresionista. La pincelada fragmentada distribuye el color con variedad moderada-alta.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Frecuencias medias-altas con textura rica. La variedad de verdes, azules y blancos genera un espectro sonoro aireado, como el viento y el mar encontrándose.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="Claude_Monet_-_Cliff_Walk_at_Pourville_-_Google_Art_Project.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🌊 Brisa marina</span><span class="tag" aria-hidden="true">🎨 Impresionismo</span><span class="tag" aria-hidden="true">🎵 Textura media</span></div>
+          <button type="button" class="speak-btn" data-text="Paseo por los acantilados de Pourville, Claude Monet, 1882. Dos figuras femeninas caminan por un promontorio verde sobre el mar. Paleta vibrante de verdes, azules marinos y blancos espumosos. La pincelada impresionista fragmenta el color en una danza de matices.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #10 Botticelli -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#10 / 16</span><span class="chroma-level" style="background:#2a3a20;color:#80c060;">MEDIO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 60% — Medio"><div class="chroma-bar" aria-hidden="true" style="width:60%;background:linear-gradient(to right,#2a6020,#60b040);"></div></div>
+        <img class="card-image" src="Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg" alt="El Nacimiento de Venus, Sandro Botticelli, 1484-1486" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Sandro Botticelli</h3>
+          <p class="card-work">El Nacimiento de Venus (c. 1484–86)</p>
+          <p class="card-desc">Azules, verdes, rosados y dorados del Renacimiento. Mayor diversidad que el Barroco, con una armonía elegante.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Espectro amplio con picos armónicos claros. Las carnaciones rosadas, el azul del mar y el oro del cabello generan una riqueza de frecuencias que suena a coral renacentista.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🌸 Paleta renacentista</span><span class="tag" aria-hidden="true">🌊 Mar y cielo</span><span class="tag" aria-hidden="true">🎵 Coral armónico</span></div>
+          <button type="button" class="speak-btn" data-text="El Nacimiento de Venus, Sandro Botticelli, circa 1484 a 1486. Venus desnuda emerge del mar sobre una concha. A su izquierda los vientos Céfiro y Cloris, a su derecha una ninfa con un manto floral. Paleta renacentista con carnaciones rosadas, azules celestes, verdes dorados y el dorado del cabello de Venus.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #11 Degas -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#11 / 16</span><span class="chroma-level" style="background:#1a2a4a;color:#5a9ae0;">MEDIO-ALTO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 68% — Medio-alto"><div class="chroma-bar" aria-hidden="true" style="width:68%;background:linear-gradient(to right,#1a3a7a,#5090d0);"></div></div>
+        <img class="card-image" src="Edgar_Germain_Hilaire_Degas_076.jpg" alt="Bailarinas Azules, Edgar Degas, 1897" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Edgar Degas</h3>
+          <p class="card-work">Bailarinas Azules (c. 1897)</p>
+          <p class="card-desc">Azules dominantes con acentos naranjas y verdes, un pastiche de color vibrante bajo la apariencia de monocromía.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Espectro amplio con dominancia en frecuencias azul-frías. Los acentos cálidos emergen como destellos armónicos.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="Edgar_Germain_Hilaire_Degas_076.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">💙 Azul dominante</span><span class="tag" aria-hidden="true">🩰 Movimiento</span><span class="tag" aria-hidden="true">🎵 Riqueza oculta</span></div>
+          <button type="button" class="speak-btn" data-text="Bailarinas Azules, Edgar Degas, circa 1897. Cuatro bailarinas de ballet en pose de descanso, ajustándose los hombros de sus trajes. Paleta dominada por azules intensos de los tutús con destellos naranjas y verdes en los cuerpos. Pastel sobre papel con textura rica y vibrante.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #12 Monet - Amapolas -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#12 / 16</span><span class="chroma-level" style="background:#3a1a10;color:#e07040;">MEDIO-ALTO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 74% — Medio-alto"><div class="chroma-bar" aria-hidden="true" style="width:74%;background:linear-gradient(to right,#6a2010,#e05030);"></div></div>
+        <img class="card-image" src="field-of-poppies.jpg!Large.jpg" alt="Amapolas, Claude Monet, 1873" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Claude Monet</h3>
+          <p class="card-work">Amapolas (1873)</p>
+          <p class="card-desc">Rojos ardientes sobre verdes y azules. El contraste de complementarios eleva la variabilidad cromática.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Los rojos de las amapolas generan picos de alta frecuencia sobre el continuo verde-azul. Mayor tensión espectral.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="field-of-poppies.jpg!Large.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🌺 Rojos vibrantes</span><span class="tag" aria-hidden="true">🌿 Complementarios</span><span class="tag" aria-hidden="true">🎵 Tensión espectral</span></div>
+          <button type="button" class="speak-btn" data-text="Amapolas, Claude Monet, 1873. Pradera en verano con una madre e hija caminando entre amapolas rojas brillantes. El cielo azul, los verdes del prado y los rojos intensos de las flores crean una paleta impresionista de alto contraste y gran variedad tonal.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #13 Van Gogh -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#13 / 16</span><span class="chroma-level" style="background:#4a3800;color:#f0c000;">ALTO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 82% — Alto"><div class="chroma-bar" aria-hidden="true" style="width:82%;background:linear-gradient(to right,#906000,#f0c000);"></div></div>
+        <img class="card-image" src="1280px-Korenveld_met_kraaien_-_s0149V1962_-_Van_Gogh_Museum.jpg" alt="Campo de Trigo con Cuervos, Vincent van Gogh, 1890" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Vincent van Gogh</h3>
+          <p class="card-work">Campo de Trigo con Cuervos (1890)</p>
+          <p class="card-desc">Amarillos vibrantes contra azules tormentosos. La pincelada expresionista alcanza una alta densidad cromática.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Gran anchura espectral. Los amarillos intensos y azules oscuros generan frecuencias muy separadas, una disonancia rica y agitada.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="1280px-Korenveld_met_kraaien_-_s0149V1962_-_Van_Gogh_Museum.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🌾 Amarillo intenso</span><span class="tag" aria-hidden="true">⛈️ Azul tormentoso</span><span class="tag" aria-hidden="true">🎵 Alta energía</span></div>
+          <button type="button" class="speak-btn" data-text="Campo de Trigo con Cuervos, Vincent van Gogh, 1890. Cielo turbulento azul oscuro sobre un campo de trigo dorado intenso. Cuervos negros en vuelo. La pincelada expresionista en espiral combina amarillos dorados, azules tormentosos, verdes vibrantes y negros. Última obra conocida del artista.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #14 Kandinsky - Several Circles -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#14 / 16</span><span class="chroma-level" style="background:#3a0a3a;color:#c050c0;">ALTO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 87% — Alto"><div class="chroma-bar" aria-hidden="true" style="width:87%;background:linear-gradient(to right,#6a0a8a,#c040c0);"></div></div>
+        <img class="card-image" src="este.jpg" alt="Several Circles, Wassily Kandinsky, 1926" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Wassily Kandinsky</h3>
+          <p class="card-work">Several Circles (1926)</p>
+          <p class="card-desc">Círculos de colores puros sobre negro, cada uno un tono diferente, saturación máxima, contraste radical.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Espectro muy amplio con picos discretos en cada frecuencia-color. El negro del fondo actúa como silencio estructural.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="este.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">⭕ Geometría pura</span><span class="tag" aria-hidden="true">🌈 Saturación máxima</span><span class="tag" aria-hidden="true">⚡ Alta energía</span></div>
+          <button type="button" class="speak-btn" data-text="Several Circles, Wassily Kandinsky, 1926. Composición abstracta de círculos de colores puros sobre fondo negro. Cada círculo tiene un color diferente: rojo, azul, amarillo, blanco, verde, naranja, violeta. Saturación máxima, contraste radical con el negro del fondo.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #15 Matisse -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#15 / 16</span><span class="chroma-level" style="background:#5a0a0a;color:#ff6040;">MUY ALTO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 92% — Muy alto"><div class="chroma-bar" aria-hidden="true" style="width:92%;background:linear-gradient(to right,#c02010,#ff4020);"></div></div>
+        <img class="card-image" src="La_Desserte_rouge,_par_Henri_Matisse.jpg" alt="La Mesa Roja, Henri Matisse, 1908" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Henri Matisse</h3>
+          <p class="card-work">La Mesa Roja (1908)</p>
+          <p class="card-desc">El rojo fauvista que absorbe todo. Saturación extrema con arabescos azules.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>El rojo dominante genera una frecuencia alta y potente. Los arabescos azules añaden modulaciones, sonido denso y envolvente.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación</span><audio controls><source src="La_Desserte_rouge,_par_Henri_Matisse.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🔴 Rojo absoluto</span><span class="tag" aria-hidden="true">🎨 Fauvismo</span><span class="tag" aria-hidden="true">🎵 Sinfonía en rojo</span></div>
+          <button type="button" class="speak-btn" data-text="La Mesa Roja, Henri Matisse, 1908. Interior con una mesa cubierta de un mantel rojo intenso con arabescos azules. La sirvienta arregla la vajilla. El rojo inunda el primer plano y la pared funden en planos de color plano. Paleta fauvista de máxima intensidad: rojo dominante con azules, verdes y blancos en armonía explosiva.">🔊 Leer descripción</button>
+        </div>
+      </article>
+
+      <!-- #16 Kandinsky - Amarillo Rojo Azul -->
+      <article class="card" role="listitem">
+        <div class="card-number-bar"><span class="card-num">#16 / 16</span><span class="chroma-level" style="background:#5a0a0a;color:#ff4444;">MÁXIMO</span></div>
+        <div class="chroma-bar-wrap" role="img" aria-label="Variabilidad cromática: 100% — Máximo"><div class="chroma-bar" aria-hidden="true" style="width:100%;background:linear-gradient(to right,#c02010,#f04010,#e040fb);"></div></div>
+        <img class="card-image" src="3840px-Kandinsky_-_Jaune_Rouge_Bleu.jpg" alt="Amarillo Rojo Azul, Wassily Kandinsky, 1925" width="720" height="405" loading="lazy" crossorigin="anonymous">
+        <div class="card-body">
+          <h3 class="card-artist">Wassily Kandinsky</h3>
+          <p class="card-work">Amarillo Rojo Azul (1925)</p>
+          <p class="card-desc">La tríada cromática pura: amarillo, rojo, azul en máxima expresión. El polo opuesto al silencio de Malevich.</p>
+          <div class="sound-profile"><span class="sound-profile-title">Perfil Sonoro</span>Máxima complejidad espectral. Donde Malevich es silencio, Kandinsky es caos organizado, toda la escala cromática expresada en sonido.</div>
+          <div class="audio-wrap"><span class="audio-label">Escuchar sonificación (máximo cromático)</span><audio controls><source src="3840px-Kandinsky_-_Jaune_Rouge_Bleu.wav" type="audio/wav"></audio></div>
+                              <div class="card-tags"><span class="tag" aria-hidden="true">🟡 Amarillo primario</span><span class="tag" aria-hidden="true">🔴 Rojo primario</span><span class="tag" aria-hidden="true">🔵 Azul primario</span><span class="tag" aria-hidden="true">🌀 Caos máximo</span></div>
+          <button type="button" class="speak-btn" data-text="Amarillo Rojo Azul, Wassily Kandinsky, 1925. Gran composición abstracta con las tres formas y colores primarios como protagonistas. Triángulos, círculos y líneas en amarillo intenso a la izquierda, negro en el centro y azul profundo a la derecha. La máxima complejidad cromática abstracta: toda la escala de color expresada simultáneamente.">🔊 Leer descripción</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== CORRELACIÓN ========== -->
+  <section id="correlacion">
+    <div class="section-header"><span class="section-label">Evidencia matemática</span><h2 class="section-title">La correlación entre color y complejidad sonora</h2></div>
+    <div class="scatter-section"><div class="scatter-box"><span class="scatter-eyebrow">Pearson r = 0.8869 · R² = 0.8417 · p &lt; 0.001 · Argira v3.5 (ICAD 2026)</span><p class="scatter-title">hue_std → Dimensión espectral (Ds)</p><p class="scatter-desc">Cada punto es una obra. El eje X es la variabilidad de tono (hue_std), el eje Y es la complejidad sonora (Ds). La línea roja es la regresión lineal. Datos de Argira v3.5 (N=45), versión presentada en ICAD 2026 y validada en Zenodo.</p><div class="scatter-svg-wrap"><svg viewBox="0 0 500 320" role="img" aria-label="Gráfico de dispersión: correlación r=0.8869 entre variabilidad cromática (hue_std) y complejidad sonora (Ds). 16 puntos de obras van de Malevich en la esquina inferior izquierda a Kandinsky en la superior derecha, con línea de regresión lineal en rojo."><rect width="500" height="320" fill="#0d0d0a"/><g stroke="rgba(232,201,106,0.08)" stroke-width="1"><line x1="60" y1="20" x2="480" y2="20"/><line x1="60" y1="73" x2="480" y2="73"/><line x1="60" y1="126" x2="480" y2="126"/><line x1="60" y1="179" x2="480" y2="179"/><line x1="60" y1="232" x2="480" y2="232"/><line x1="60" y1="285" x2="480" y2="285"/><line x1="60" y1="20" x2="60" y2="285"/><line x1="144" y1="20" x2="144" y2="285"/><line x1="228" y1="20" x2="228" y2="285"/><line x1="312" y1="20" x2="312" y2="285"/><line x1="396" y1="20" x2="396" y2="285"/><line x1="480" y1="20" x2="480" y2="285"/></g><line x1="60" y1="285" x2="480" y2="285" stroke="rgba(232,201,106,0.4)" stroke-width="1.5"/><line x1="60" y1="20" x2="60" y2="285" stroke="rgba(232,201,106,0.4)" stroke-width="1.5"/><line x1="65" y1="278" x2="478" y2="27" stroke="#ef5350" stroke-width="1.5" stroke-dasharray="6 3"/><circle cx="69" cy="284" r="5" fill="#e8c96a"/><circle cx="85" cy="261" r="5" fill="#e8c96a"/><circle cx="102" cy="238" r="5" fill="#e8c96a"/><circle cx="127" cy="197" r="5" fill="#e8c96a"/><circle cx="148" cy="172" r="5" fill="#e8c96a"/><circle cx="169" cy="145" r="5" fill="#e8c96a"/><circle cx="186" cy="124" r="5" fill="#e8c96a"/><circle cx="220" cy="84" r="5" fill="#e8c96a"/><circle cx="245" cy="75" r="5" fill="#e8c96a"/><circle cx="270" cy="60" r="5" fill="#e8c96a"/><circle cx="295" cy="52" r="5" fill="#e8c96a"/><circle cx="321" cy="42" r="5" fill="#e8c96a"/><circle cx="354" cy="34" r="5" fill="#e8c96a"/><circle cx="383" cy="30" r="5" fill="#e8c96a"/><circle cx="413" cy="27" r="5" fill="#e8c96a"/><circle cx="455" cy="22" r="5" fill="#e8c96a"/><text x="69" y="298" font-family="'IBM Plex Sans'" font-size="9" fill="rgba(232,201,106,0.6)">Malevich</text><text x="455" y="14" font-family="'IBM Plex Sans'" font-size="9" fill="rgba(232,201,106,0.6)">Kandinsky</text><text x="392" y="55" font-family="'IBM Plex Sans'" font-size="9" fill="#ef5350">r = 0.8869</text><text x="270" y="305" font-family="'IBM Plex Sans'" font-size="10" fill="rgba(168,158,136,0.8)">hue_std (variabilidad de tono)</text><text x="16" y="153" font-family="'IBM Plex Sans'" font-size="10" fill="rgba(168,158,136,0.8)" transform="rotate(-90,16,153)">Ds (complejidad sonora)</text></svg></div><p class="scatter-caption">16 obras mostradas · Correlación r = 0.8869 calculada sobre N = 45 obras (dataset completo, Argira v3.5) · <a href="https://doi.org/10.5281/zenodo.18865019" target="_blank" rel="noopener" style="color:rgba(232,201,106,0.7);">Zenodo v10 ↗</a></p></div></div>
+  </section>
+
+  <!-- ========== LUPA TEMPORAL ========== -->
+  <section id="lupa-temporal" style="padding:64px 16px;">
+    <div class="section-header"><span class="section-label">Efecto lupa temporal</span><h2 class="section-title">Ralentiza el sonido · Percibe la textura</h2></div>
+    <div style="max-width:680px;margin:0 auto;">
+      <p style="text-align:center;margin-bottom:28px;">A velocidad normal el oído recibe la complejidad de golpe.<br>Ralentizar es como usar una lupa sobre la textura cromática —<br>la correlación r ≈ 0.89 se preserva.</p>
+      <p style="text-align:center;font-size:0.85rem;color:var(--gold-dim);margin-bottom:28px;">Matisse tiene la mayor saturación media del corpus, la lupa revela su textura armónica.</p>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:20px;padding:20px;border-bottom:1px solid var(--border);">
+          <img src="Matisse-Woman-with-a-Hat.jpg" alt="La Mujer del Sombrero, Henri Matisse, 1905" width="90" height="90" crossorigin="anonymous">
+          <div><div style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;">Obra · Ejemplo lupa</div><div style="font-weight:600;">Henri Matisse</div><div>La Mujer del Sombrero (1905)</div></div>
+        </div>
+        <div style="padding:20px;">
+          <div class="shelving-panel">
+            <div class="param-row"><label>🎚️ Atenuar agudos <span id="lupaShelvingGainVal">0</span> dB</label><input type="range" id="lupaShelvingGain" min="-12" max="0" step="1" value="0"></div>
+            <div class="param-row"><label>📡 Frecuencia de corte <span id="lupaShelvingFreqVal">5000</span> Hz</label><input type="range" id="lupaShelvingFreq" min="2000" max="10000" step="100" value="5000"></div>
+            <div class="shelving-indicator"><div class="shelving-indicator-fill" id="lupaShelvingFill"></div></div>
+            <div class="shelving-note">Modo noche / reduce fatiga auditiva</div>
+          </div>
+          <div style="margin-bottom:16px;"><label>🐢 Velocidad (efecto lupa) <span id="lupaSpeedVal" style="color:var(--gold);">1.00×</span></label><input type="range" id="lupaSpeed" min="0.5" max="1.5" step="0.05" value="1.0" style="width:100%;"></div>
+          <div style="display:flex;gap:10px;"><button id="lupaBtnPlay" style="flex:1;">▶ Escuchar con lupa</button><button id="lupaBtnStop" style="flex:1;">■ Parar</button></div>
+          <div id="lupaStatus" style="margin-top:12px;text-align:center;"></div>
+          <div class="lupa-inversa-wrap" id="lupa-inversa-wrap">
+            <span class="lupa-inversa-label">Huella geométrica del sonido · Argira Inversa</span>
+            <span class="lupa-inversa-freq" id="lupa-inversa-freq-label">— Hz</span>
+            <canvas id="lupa-inversa-canvas" width="560" height="200"></canvas>
+            <div class="lupa-pattern-row"><button class="lupa-pchip active" data-pattern="chladni">Chladni</button><button class="lupa-pchip" data-pattern="lissajous">Lissajous</button><button class="lupa-pchip" data-pattern="polar">Polar</button><button class="lupa-pchip" data-pattern="phi">Espiral φ</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ANALIZA TU IMAGEN ========== -->
+  <section id="analiza-tu-imagen" style="padding:64px 16px;">
+    <div class="section-header"><span class="section-label">Sonificación interactiva</span><h2 class="section-title">Analiza tu imagen</h2></div>
+    <div style="max-width:680px;margin:0 auto;">
+      <p style="text-align:center;margin-bottom:28px;">Sube cualquier pintura o imagen.<br>El navegador calcula sus métricas y genera la firma acústica, la misma fórmula del dataset.</p>
+      <label id="tu-upload-zone" for="tu-file-input"><div style="font-size:2.4rem;">🖼</div><div style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.18em;color:var(--gold);">Sube tu imagen</div><div style="font-size:0.82rem;">Haz clic o arrastra aquí · JPG, PNG, GIF, WebP</div><input type="file" id="tu-file-input" accept="image/*" aria-label="Seleccionar imagen para sonificar" style="position:absolute;width:1px;height:1px;opacity:0;clip:rect(0,0,0,0);overflow:hidden;"></label>
+      <canvas id="tu-canvas" style="display:none;"></canvas>
+      <div id="tu-panel" style="display:none;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:20px;padding:20px;"><img id="tu-preview" width="90" height="90" crossorigin="anonymous"><div id="tu-info"><div style="font-family:'Cinzel',serif;">Tu imagen</div><div id="tu-nombre"></div><div id="tu-metricas"></div></div></div>
+          <div style="padding:16px 20px;"><div style="display:flex;justify-content:space-between;"><span>Variabilidad cromática</span><span id="tu-chroma-pct"></span></div><div style="height:6px;background:rgba(232,201,106,0.08);border-radius:3px;"><div id="tu-chroma-bar" style="height:100%;width:0%;"></div></div></div>
+          <div id="tu-params-grid" style="display:grid;grid-template-columns:1fr 1fr;"></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;">
+          <div style="padding:20px;">
+            <div class="shelving-panel">
+              <div class="param-row"><label>🎚️ Atenuar agudos <span id="tuShelvingGainVal">0</span> dB</label><input type="range" id="tuShelvingGain" min="-12" max="0" step="1" value="0"></div>
+              <div class="param-row"><label>📡 Frecuencia de corte <span id="tuShelvingFreqVal">5000</span> Hz</label><input type="range" id="tuShelvingFreq" min="2000" max="10000" step="100" value="5000"></div>
+              <div class="shelving-indicator"><div class="shelving-indicator-fill" id="tuShelvingFill"></div></div>
+            </div>
+            <label>🐢 Velocidad (efecto lupa) <span id="tu-speed-val">1.00×</span></label><input type="range" id="tu-speed" min="0.25" max="1.5" step="0.05" value="1.0" style="width:100%;">
+          </div>
+          <div style="display:flex;gap:10px;padding:0 20px 20px;"><button id="tu-btn-play">▶ Escuchar</button><button id="tu-btn-stop">■ Parar</button><button id="tu-btn-download">⬇ Descargar WAV</button></div>
+          <div id="tu-status" style="padding:0 20px 16px;text-align:center;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEST AUDITIVO ========== -->
+  <section id="test-auditivo">
+    <div class="divider"><div class="divider-line"></div><span class="divider-text">Test auditivo</span><div class="divider-line"></div></div>
+    <div class="section-header" style="padding-top:0"><span class="section-label">Percepción crossmodal</span><h2 class="section-title">¿Puedes oír el color?</h2></div>
+    <div class="test-section"><div class="test-intro">Escucha cada sonido <strong>sin ver las imágenes</strong>.<br>¿Cuál suena a más color, más caos, más variedad?<br>Elige con los botones y se revelarán las pinturas.</div><div id="testPairsContainer"></div><div class="score-panel" id="score-panel"><div class="score-number" id="score-number">0/5</div><div class="score-label">Aciertos en el test perceptivo crossmodal</div><p class="score-message" id="score-message"></p><button class="reset-test-btn" id="resetTestBtn">🔄 Reiniciar test</button></div></div>
+  </section>
+</main>
+
+<footer>
+  <p class="footer-title">Argira Station</p>
+  <p class="footer-text">Jose Ranero García · ICAD 2026<br>Sonificación basada en datos reales<br>r(hue_std, Ds) = 0.8869 · R² = 0.8417 · p &lt; 0.001<br>N=45 obras · Argira v3.5 · dominio público</p>
+  <a class="footer-doi" href="https://doi.org/10.5281/zenodo.18865019" target="_blank">📄 Argira v3.5 en Zenodo · 10.5281/zenodo.18865019</a>
+
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="argira-lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de la obra"><button class="lightbox-close" id="lb-close">✕</button><img class="lightbox-img" id="lb-img" alt=""><span class="lightbox-caption" id="lb-caption"></span></div>
+
+
+<button id="btn-stop-all" aria-label="Detener todo el audio y voz" title="Detener todo">⏹ Detener todo</button>
+
+<script src="script.js"></script>
+</body>
+</html>
